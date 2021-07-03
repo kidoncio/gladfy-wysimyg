@@ -1,2 +1,3 @@
 export * from './colorStyle'
-export * from './ImageBlock'
+export * from './image/ImageComponent'
+export * from './image/ImageExtension'

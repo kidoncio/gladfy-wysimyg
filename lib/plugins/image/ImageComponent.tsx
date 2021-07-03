@@ -1,20 +1,27 @@
-import React from 'react'
-import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
-import axios from 'axios'
-import { MediumImage } from '../components/MediumImage'
+import React, { useEffect } from 'react'
+import { NodeViewContent, NodeViewWrapper } from '@tiptap/react'
 import { Editor } from '@tiptap/core/dist/packages/core/src/Editor'
+import axios from 'axios'
+import { MediumImage } from '../../components/MediumImage'
+import {
+  DivContainerStyled,
+  DivImageCaptionContendSpan,
+  DivImageCaptionStyled,
+} from './ImageStyles'
 
 interface Props {
   editor: Editor
 }
 
-export const ImageBlock = (props: Props & any): JSX.Element => {
+export const ImageComponent = (props: Props & any) => {
+  console.log('imageBlock props -> ', props.editor.isEditable)
+
   const imageUrl = props.node.attrs.url || props.node.attrs.src
 
   let img = null
   let file = null
 
-  React.useEffect(() => {
+  useEffect(() => {
     replaceImg()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -184,7 +191,6 @@ export const ImageBlock = (props: Props & any): JSX.Element => {
   }
 
   function handleClick(e: any) {
-    console.log('clicked, ', e)
     setActive()
   }
 
@@ -218,111 +224,28 @@ export const ImageBlock = (props: Props & any): JSX.Element => {
   const { width, height, ratio } = parseAspectRatio()
 
   return (
-    <NodeViewWrapper
-      selected={props.selected}
-      as="figure"
-      className={`graf graf--figure ${directionClass()} ${
-        props.selected ? 'is-selected is-mediaFocused' : ''
-      }`}
-    >
-      <div
-        onClick={handleClick}
-        className="aspectRatioPlaceholder is-locked"
-        style={{
-          maxHeight: height,
-          maxWidth: width,
-        }}
-      >
-        <div className="aspect-ratio-fill" style={{ paddingBottom: `${ratio}%` }} />
-
-        {/*<img
-          src={imageUrl}
-          height={width}
-          width={height}
-          className="graf-image"
-          contentEditable={false}
-          alt={imageUrl}
-        />*/}
+    <NodeViewWrapper selected={props.selected}>
+      <DivContainerStyled onClick={handleClick} maxWidth={width} maxHeight={height}>
+        <div style={{ paddingBottom: `${ratio}%` }} />
 
         <MediumImage
           src={imageUrl}
           height={width}
           width={height}
           className={`graf-image ${props.editor.isEditable ? '.no-zoom' : ''}`}
-          contentEditable={false}
           editable={props.editor.isEditable}
         />
-      </div>
+      </DivContainerStyled>
 
-      <NodeViewContent as={'figcaption'} className="imageCaption">
-        {props.node.content.size === 0 && (
-          <span className="danteDefaultPlaceholder">type a caption (optional)</span>
-        )}
-      </NodeViewContent>
+      <DivImageCaptionStyled>
+        <NodeViewContent as={'figcaption'}>
+          {props.node.content.size === 0 && (
+            <DivImageCaptionContendSpan editable={props.editor.isEditable}>
+              type a caption (optional)
+            </DivImageCaptionContendSpan>
+          )}
+        </NodeViewContent>
+      </DivImageCaptionStyled>
     </NodeViewWrapper>
   )
-}
-
-export const ImageBlockConfig = (options = {}) => {
-  const config = {
-    name: 'ImageBlock',
-    tag: 'image-block',
-    component: ImageBlock,
-    atom: false,
-    attributes: {
-      url: { default: null },
-      src: { default: null },
-      width: { default: '' },
-      height: { default: '' },
-      loading: { default: false },
-      loading_progress: { default: 0 },
-      caption: { default: 'caption!' },
-      direction: { default: 'center' },
-      file: { default: null },
-      aspect_ratio: {
-        default: {
-          width: 200,
-          height: 200,
-          ratio: 100,
-        },
-      },
-    },
-    dataSerializer: (data: { aspect_ratio: any }) => {
-      return {
-        ...data,
-        aspect_ratio: JSON.stringify(data.aspect_ratio),
-        file: null,
-      }
-    },
-    parseHTML: [
-      {
-        tag: 'image-block',
-      },
-      {
-        tag: 'img[src]',
-      },
-    ],
-    widget_options: {
-      displayOnInlineTooltip: true,
-      insertion: 'upload',
-      insert_block: 'image',
-    },
-    keyboardShortcuts: (editor: any) => {
-      return {
-        Enter: ({ editor }: any) => {
-          if (editor.isActive('ImageBlock')) {
-            editor.commands.insertContent({
-              type: 'paragraph',
-            })
-
-            editor.chain().focus().toggleNode('paragraph', 'paragraph', {}).run()
-
-            return true
-          }
-        },
-      }
-    },
-  }
-
-  return Object.assign(config, options)
 }

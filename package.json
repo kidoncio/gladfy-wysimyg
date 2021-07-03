@@ -22,6 +22,7 @@
     "package:build": "rm -rf dist && NODE_ENV=production babel ./lib --out-dir dist --copy-files"
   },
   "dependencies": {
+    "@tiptap/extension-font-family": "^2.0.0-beta.13",
     "@tiptap/extension-link": "^2.0.0-beta.18",
     "@tiptap/extension-text-align": "^2.0.0-beta.20",
     "@tiptap/extension-text-style": "^2.0.0-beta.16",
@@ -31,7 +32,8 @@
     "medium-zoom": "^1.0.6",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -41,6 +43,7 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@types/react": "17.0.13",
+    "@types/styled-components": "^5.1.11",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "^8.3.0",
