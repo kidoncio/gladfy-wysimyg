@@ -2,7 +2,7 @@ import React from 'react'
 import { AnyExtension, Content, EditorContent, useEditor } from '@tiptap/react'
 import { Editor } from '@tiptap/core/dist/packages/core/src/Editor'
 import StarterKit from '@tiptap/starter-kit'
-import { Color, ImageExtension } from './plugins'
+import { Color } from './plugins'
 import TextStyle from '@tiptap/extension-text-style'
 import FontFamily from '@tiptap/extension-font-family'
 import TextAlign from '@tiptap/extension-text-align'
@@ -26,7 +26,7 @@ interface Props {
    * A list of tiptap extensions to the extensions property.
    * You can see the full list here: https://www.tiptap.dev/api/extensions/
    *
-   * @default [StarterKit,Color,TextStyle,FontFamily,TextAlign,Link,ImageBlockConfig]
+   * @default [StarterKit,Color,TextStyle,FontFamily,TextAlign,Link]
    */
   extensions?: AnyExtension[]
   /**
@@ -63,16 +63,7 @@ export const GladfyEditor = ({
     content,
     editable,
     injectCSS,
-    extensions: [
-      StarterKit,
-      Color,
-      TextStyle,
-      FontFamily,
-      TextAlign,
-      Link,
-      ImageExtension,
-      ...extensions,
-    ],
+    extensions: [StarterKit, Color, TextStyle, FontFamily, TextAlign, Link, ...extensions],
     onBeforeCreate: ({ editor }) => {
       if (onBeforeCreate) onBeforeCreate({ editor })
     },

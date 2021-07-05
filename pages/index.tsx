@@ -22,21 +22,6 @@ const content = {
     },
     { type: 'paragraph' },
     {
-      type: 'gladfyImage',
-      attrs: {
-        url: 'https://media1.giphy.com/media/3ohs7HdhQA4ffttvrO/giphy.gif',
-        src: null,
-        width: 480,
-        height: 480,
-        loading: false,
-        loading_progress: 0,
-        caption: 'caption!',
-        direction: 'left',
-        file: null,
-        aspect_ratio: { width: 480, height: 480, ratio: 100 },
-      },
-    },
-    {
       type: 'paragraph',
       content: [
         {
@@ -182,21 +167,6 @@ const content = {
         { type: 'text', marks: [{ type: 'code' }], text: 'sqlite3' },
         { type: 'text', text: ' modules from your plugins file.' },
       ],
-    },
-    {
-      type: 'gladfyImage',
-      attrs: {
-        url: null,
-        src: 'https://docs.cypress.io/_nuxt/img/test-runner-settings-nodejs-version.4028364.jpg',
-        width: 1000,
-        height: 702,
-        loading: false,
-        loading_progress: 0,
-        caption: 'caption!',
-        direction: 'center',
-        file: null,
-        aspect_ratio: { width: 1000, height: 702, ratio: 70.19999999999999 },
-      },
     },
     {
       type: 'heading',
@@ -410,9 +380,7 @@ export default function Home() {
           Get started by editing <code className={styles.code}>pages/index.js</code>
         </p>
 
-        <div className={styles.grid}>
-          <GladfyEditor content={content} />
-        </div>
+        <GladfyEditor content={content} />
       </main>
     </div>
   )
