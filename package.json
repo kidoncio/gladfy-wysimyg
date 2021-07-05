@@ -1,5 +1,5 @@
 {
-  "name": "@kiddoinpyjamas/gladfy-wysimyg",
+  "name": "gladfy-wysimyg",
   "version": "0.1.0",
   "private": false,
   "description": "A React WYSIMYG for Gladfy",
@@ -17,8 +17,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiddoinpyjamas/gladfy-wysimyg"
+    "url": "git+https://github.com/kiddoinpyjamas/gladfy-wysimyg.git"
   },
+  "bugs": {
+    "url": "https://github.com/kiddoinpyjamas/gladfy-wysimyg/issues"
+  },
+  "homepage": "https://github.com/kiddoinpyjamas/gladfy-wysimyg#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
